@@ -1,15 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe"
+      crossorigin="anonymous"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar sm:navbar-expand bg-1 fg-2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Wakelab</a>
+        <button
+          class="btn-icon navbar-toggler"
+          type="button"
+          data-bs-toggle="drawer"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+        </button>
+        <dialog
+          class="drawer drawer-end"
+          tabindex="-1"
+          id="navbarNavAltMarkup"
+          aria-labelledby="navbarNavAltMarkupLabel"
+        >
+          <div class="drawer-header">
+            <h5 class="drawer-title" id="navbarNavAltMarkupLabel">Menu</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="drawer"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="drawer-body">
+            <div class="nav nav-pills navbar-nav">
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >Accueil</a
+              >
+              <a class="nav-link" href="#">À propos</a>
+            </div>
+          </div>
+        </dialog>
+      </div>
+    </nav>
 
+    <main class="container-fluid">
+      <div class="row d-flex">
+        <!-- Sidebar -->
+        <aside
+          class="col-12 lg:col-3 border-end p-4 bg-body-tertiary min-vh-100"
+        >
+          <h5 class="fw-bold mb-4">Rechercher activité</h5>
 
-    
-    
-    <script src="app.js"></script>
-</body>
+          <!-- Search -->
+          <div class="mb-4">
+            <label for="activitySearch" class="form-label"> Rechercher </label>
+            <input
+              type="search"
+              class="form-control"
+              id="activitySearch"
+              placeholder="Rechercher activité..."
+            />
+          </div>
+
+          <!-- Category -->
+          <div class="mb-4">
+            <label for="categoryFilter" class="form-label"> Category :</label>
+            <select class="form-select" id="categoryFilter">
+              <option value="all" selected>All categories</option>
+              <option value="programming">Apprentissage</option>
+              <option value="design">Jeu</option>
+            </select>
+          </div>
+
+          <!-- Refresh -->
+          <button
+            type="button"
+            class="btn btn-outline-secondary w-100"
+            id="refreshActivities"
+          >
+            <span aria-hidden="true">↻</span>
+            Refresh
+          </button>
+        </aside>
+
+        <!-- Main content -->
+        <main class="col-12 lg:col-9 p-4">
+          <h2>Activités disponibles</h2>
+
+          <div id="activitiesContainer">
+            <!-- Exchange cards will be rendered here -->
+            <!-- Activity 1 -->
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                  >
+                    <span class="badge text-bg-primary"> Jeu </span>
+
+                    <small class="text-body-secondary"> 15 min </small>
+                  </div>
+
+                  <h4 class="card-title fg-success">Deux vérités et un mensonge</h4>
+
+                  <p class="card-text text-body-secondary">
+                    Relancer l'attention et favoriser les échanges.
+                  </p>
+
+                  <div
+                    class="mt-auto d-flex justify-content-between align-items-center pt-3"
+                  >
+                    <small class="text-body-secondary">
+                      Par Youssef Alaoui
+                    </small>
+
+                    <button
+                      class="btn btn-outline-primary btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#activityModal"
+                      data-activity-id="2"
+                    >
+                      Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Activity 2 -->
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                  >
+                    <span class="badge text-bg-success"> Apprentissage </span>
+
+                    <small class="text-body-secondary"> 10 min </small>
+                  </div>
+
+                  <h4 class="card-title fg-success">Le quiz éclair</h4>
+
+                  <p class="card-text text-body-secondary">
+                    Réactiver les notions vues le matin.
+                  </p>
+
+                  <div
+                    class="mt-auto d-flex justify-content-between align-items-center pt-3"
+                  >
+                    <small class="text-body-secondary">
+                      Par Sara El Amrani
+                    </small>
+
+                    <button
+                      class="btn btn-outline-primary btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#activityModal"
+                      data-activity-id="1"
+                    >
+                      Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
 </html>
