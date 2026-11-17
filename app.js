@@ -1,7 +1,3 @@
-// =================================
-// Code Global
-// =================================
-
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const URL = "http://127.0.0.1:3000/api/activites";
@@ -16,23 +12,17 @@ const activities = JSON.parse(localStorage.getItem("activities"));
 console.log(activities);
 
 retrieveData();
+cartesActivitéAffichage(activities);
+searchActivity(activities);
 
-// =================================
-// INDEX.HTML
-// =================================
+function cartesActivitéAffichage(activities) {
+  const activitiesContainer = document.getElementById("activitiesContainer");
+  console.log(activitiesContainer);
 
-if (document.getElementById("indexPage")) {
-  
-  cartesActivitéAffichage(activities);
+  activitiesContainer.innerHTML = ``;
 
-  function cartesActivitéAffichage(activities) {
-    const activitiesContainer = document.getElementById("activitiesContainer");
-    console.log(activitiesContainer);
-
-    activitiesContainer.innerHTML = ``;
-
-    activities.forEach((activity) => {
-      let carte = `<div class="col-12 col-md-6 col-xl-4">
+  activities.forEach((activity) => {
+    let carte = `<div class="col-12 col-md-6 col-xl-4">
                 <div class="card h-100 shadow-sm">
                   <div class="card-body d-flex flex-column">
                     <div
@@ -68,57 +58,48 @@ if (document.getElementById("indexPage")) {
                 </div>
               </div>`;
 
-      activitiesContainer.innerHTML += carte;
-    });
-    detailButtonsEvent(activities);
-  }
-
-  function detailButtonsEvent(activites) {
-    const detailButtons = document.querySelectorAll(".detailButtons");
-    console.log(detailButtons);
-
-    detailButtons.forEach((button) =>
-      button.addEventListener("click", (event) => {
-        const activityRechercher = activites.find(
-          (activity) => activity.id == button.dataset.activityId,
-        );
-
-        detailsModal(activityRechercher);
-      }),
-    );
-  }
-
-  function detailsModal(activityRechercher) {
-    const detailsForm = document.forms["detailsForm"];
-    console.log(detailsForm);
-
-    detailsForm.modalTitle.value = activityRechercher.titre;
-    detailsForm.modalTheme.value = activityRechercher.theme;
-    detailsForm.modalDuration.value = activityRechercher.duree;
-    detailsForm.modalObjectives.value = activityRechercher.objectifs;
-    detailsForm.modalDescription.value = activityRechercher.description;
-    detailsForm.modalAuthor.value = activityRechercher.auteur;
-    detailsForm.modalCreatedAt.value = activityRechercher.createdAt;
-    detailsForm.modalUpdatedAt.value = activityRechercher.updatedAt;
-  }
-
+    activitiesContainer.innerHTML += carte;
+  });
+  detailButtonsEvent(activities);
 }
 
-// =================================
-// POSTULER.HTML
-// =================================
+function detailButtonsEvent(activites) {
+  const detailButtons = document.querySelectorAll(".detailButtons");
+  console.log(detailButtons);
 
-if (document.getElementById("postulerPage")) {
+  detailButtons.forEach((button) =>
+    button.addEventListener("click", (event) => {
+      const activityRechercher = activites.find(
+        (activity) => activity.id == button.dataset.activityId,
+      );
 
-  manageAuthor();
+      detailsModal(activityRechercher);
+    }),
+  );
+}
 
-  function manageAuthor(){
-    const usernameInput = document.getElementById("newActivityAuthor")
-    if(localStorage.getItem("auteur")){
-      usernameInput.readOnly = true
-    }
-  }
+function detailsModal(activityRechercher) {
+  const detailsForm = document.forms["detailsForm"];
+  console.log(detailsForm);
 
-  
+  detailsForm.modalTitle.value = activityRechercher.titre;
+  detailsForm.modalTheme.value = activityRechercher.theme;
+  detailsForm.modalDuration.value = activityRechercher.duree;
+  detailsForm.modalObjectives.value = activityRechercher.objectifs;
+  detailsForm.modalDescription.value = activityRechercher.description;
+  detailsForm.modalAuthor.value = activityRechercher.auteur;
+  detailsForm.modalCreatedAt.value = activityRechercher.createdAt;
+  detailsForm.modalUpdatedAt.value = activityRechercher.updatedAt;
+}
 
+function searchActivity(activities) {
+  const searchBar = document.getElementById("activitySearch");
+
+  searchBar.addEventListener("keyup", (event) => {
+    let searchedActivities = activities.filter((activity) =>
+      activity.titre.toLowerCase().includes(event.target.value.toLowerCase()),
+    );
+
+    cartesActivitéAffichage(searchedActivities);
+  });
 }
