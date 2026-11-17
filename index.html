@@ -133,7 +133,7 @@
       </div>
 
       <!-- Form -->
-      <form id="activityForm">
+      <form id="activityForm" name="detailsForm">
         <!-- Scrollable body -->
         <div class="dialog-body overflow-y-auto" style="max-height: 65vh">
           <!-- Title -->
@@ -154,12 +154,7 @@
             <div class="col-md-7">
               <label for="modalTheme" class="form-label"> Theme </label>
 
-              <select class="form-select" id="modalTheme" disabled required>
-                <option value="jeu">Jeu</option>
-                <option value="apprentissage">Apprentissage</option>
-                <option value="creativite">Créativité</option>
-                <option value="communication">Communication</option>
-              </select>
+              <input type="text" class="form-control" id="modalTheme" required disabled>
             </div>
 
             <div class="col-md-5">
@@ -248,7 +243,7 @@
         <div class="dialog-footer">
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn-outline theme-secondary"
             data-bs-dismiss="dialog"
           >
             Close
@@ -256,7 +251,7 @@
 
           <button
             type="button"
-            class="btn btn-outline-warning"
+            class="btn-outline theme-warning"
             id="modifyActivityBtn"
           >
             Modify
@@ -264,7 +259,7 @@
 
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn-outline theme-secondary"
             id="cancelEditBtn"
             hidden
           >
@@ -273,7 +268,7 @@
 
           <button
             type="submit"
-            class="btn btn-warning"
+            class="btn-outline theme-success"
             id="saveActivityBtn"
             hidden
           >
