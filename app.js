@@ -15,6 +15,7 @@ console.log(activities);
 
 carteActivitéAffichage(activities);
 
+
 function carteActivitéAffichage(activities) {
     const activitiesContainer = document.getElementById("activitiesContainer");
     console.log(activitiesContainer);
@@ -47,7 +48,7 @@ function carteActivitéAffichage(activities) {
                     </small>
 
                     <button
-                        class="btn btn-warning btn-sm"
+                        class="detailButtons btn btn-warning btn-sm"
                         data-bs-toggle="dialog"
                         data-bs-target="#activityDialog"
                         data-activity-id="${activity.id}">
@@ -61,3 +62,22 @@ function carteActivitéAffichage(activities) {
         activitiesContainer.innerHTML += carte;
     });
 }
+
+
+function detailsButtonsEvent(activites){
+
+    const detailButtons = document.querySelectorAll(".detailButtons")
+    console.log(detailButtons)
+
+    detailButtons.forEach(button => button.addEventListener("click", event => {
+
+        const activityRechercher = activites.find(activity => activity.id == button.dataset.activityId)
+        
+        
+
+
+    }))
+
+
+}
+
