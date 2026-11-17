@@ -6,17 +6,17 @@ async function retrieveData() {
     const rsp = await axios.get(URL);
     const activities = rsp.data;
     localStorage.setItem("activities", JSON.stringify(activities));
-}
+};
 
 retrieveData();
 
 const activities = JSON.parse(localStorage.getItem("activities"));
 console.log(activities);
 
-carteActivitéAffichage(activities);
+cartesActivitéAffichage(activities);
 
 
-function carteActivitéAffichage(activities) {
+function cartesActivitéAffichage(activities) {
     const activitiesContainer = document.getElementById("activitiesContainer");
     console.log(activitiesContainer);
 
@@ -61,10 +61,10 @@ function carteActivitéAffichage(activities) {
 
         activitiesContainer.innerHTML += carte;
     });
-}
+    detailButtonsEvent(activities)
+};
 
-
-function detailsButtonsEvent(activites){
+function detailButtonsEvent(activites){
 
     const detailButtons = document.querySelectorAll(".detailButtons")
     console.log(detailButtons)
@@ -73,11 +73,27 @@ function detailsButtonsEvent(activites){
 
         const activityRechercher = activites.find(activity => activity.id == button.dataset.activityId)
         
-        
+        detailsModal(activityRechercher);
 
 
     }))
 
 
-}
+};
+
+function detailsModal(activityRechercher){
+
+    const detailsForm = document.forms['detailsForm']
+    console.log(detailsForm)
+
+    detailsForm.modalTitle.value = activityRechercher.titre
+    detailsForm.modalTheme.value = activityRechercher.theme
+    detailsForm.modalDuration.value = activityRechercher.duree
+    detailsForm.modalObjectives.value = activityRechercher.objectifs
+    detailsForm.modalDescription.value = activityRechercher.description
+    detailsForm.modalAuthor.value = activityRechercher.auteur
+    detailsForm.modalCreatedAt.value = activityRechercher.createdAt
+    detailsForm.modalUpdatedAt.value = activityRechercher.updatedAt
+
+};
 
