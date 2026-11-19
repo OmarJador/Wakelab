@@ -5,14 +5,13 @@ mainCode();
 
 async function mainCode() {
   const formNewActivity = document.forms["newActivityForm"];
-  manageAuthor(formNewActivity);
+  manageAuthor();
   submitNewActivity(formNewActivity);
-  resetUser(formNewActivity);
+  resetUser();
 }
 
-function manageAuthor(formNewActivity) {
+function manageAuthor() {
   const usernameInput = document.getElementById("newActivityAuthor");
-  console.log(formNewActivity.newActivityAuthor);
   if (localStorage.getItem("auteur")) {
     usernameInput.value = JSON.parse(localStorage.getItem("auteur"));
     usernameInput.readOnly = true;
@@ -24,8 +23,9 @@ async function submitNewActivity(formNewActivity) {
     event.preventDefault();
     let ele = newActivityObject(formNewActivity);
     postObject(ele);
-    event.target.reset();
+    
     manageAuthor();
+    window.location.href = window.location.href
   });
 }
 
@@ -53,11 +53,11 @@ async function postObject(ele) {
   await axios.post(URL, ele);
 }
 
-function resetUser(formNewActivity){
+function resetUser(){
 
-    const resetUser = document.getElementById("resetUser")
+    const resetUserForm = document.getElementById("resetUser")
 
-    resetUser.addEventListener("click", event => {
+    resetUserForm.addEventListener("click", event => {
 
         localStorage.removeItem("auteur")
         window.location.href = window.location.href
