@@ -14,6 +14,7 @@ console.log(activities);
 retrieveData();
 cartesActivitéAffichage(activities);
 searchActivity(activities);
+filterActivities(activities);
 
 function cartesActivitéAffichage(activities) {
   const activitiesContainer = document.getElementById("activitiesContainer");
@@ -101,5 +102,21 @@ function searchActivity(activities) {
     );
 
     cartesActivitéAffichage(searchedActivities);
+  });
+}
+
+function filterActivities(activites) {
+  const category = document.getElementById("categoryFilter");
+
+  category.addEventListener("change", (event) => {
+    let selectedCategoryActivities = activites.filter(
+      (activity) => activity.theme == category.value,
+    );
+
+    if (category.value == "all") {
+      cartesActivitéAffichage(activites);
+    } else {
+      cartesActivitéAffichage(selectedCategoryActivities);
+    }
   });
 }
