@@ -2,24 +2,20 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const URL = "http://127.0.0.1:3000/api/activites";
 
-async function retrieveData() {
+mainCode();
+
+async function mainCode() {
   const rsp = await axios.get(URL);
   const activities = rsp.data;
-  localStorage.setItem("activities", JSON.stringify(activities));
+  // localStorage.setItem("activities", JSON.stringify(activities));
+  cartesActivitéAffichage(activities);
+  searchActivity(activities);
+  filterActivities(activities);
+  refreshButton();
 }
-
-const activities = JSON.parse(localStorage.getItem("activities"));
-console.log(activities);
-
-retrieveData();
-cartesActivitéAffichage(activities);
-searchActivity(activities);
-filterActivities(activities);
-refreshButton();
 
 function cartesActivitéAffichage(activities) {
   const activitiesContainer = document.getElementById("activitiesContainer");
-  console.log(activitiesContainer);
 
   activitiesContainer.innerHTML = ``;
 
@@ -67,7 +63,6 @@ function cartesActivitéAffichage(activities) {
 
 function detailButtonsEvent(activites) {
   const detailButtons = document.querySelectorAll(".detailButtons");
-  console.log(detailButtons);
 
   detailButtons.forEach((button) =>
     button.addEventListener("click", (event) => {
@@ -82,7 +77,6 @@ function detailButtonsEvent(activites) {
 
 function detailsModal(activityRechercher) {
   const detailsForm = document.forms["detailsForm"];
-  console.log(detailsForm);
 
   detailsForm.modalTitle.value = activityRechercher.titre;
   detailsForm.modalTheme.value = activityRechercher.theme;
@@ -122,8 +116,18 @@ function filterActivities(activites) {
   });
 }
 
-function refreshButton(){
-  const refreshActivities = document.querySelector("#refreshActivities")
+function refreshButton() {
+  const refreshActivities = document.querySelector("#refreshActivities");
 
-  refreshActivities.addEventListener("click", event => {window.location.href = window.location.href})
+  refreshActivities.addEventListener("click", (event) => {
+    window.location.href = window.location.href;
+  });
+}
+
+function initializePage() {
+  const activitiesLink = document.getElementById("activities");
+
+  activitiesLink.addEventListener("click", (event) => {
+    location.reload();
+  });
 }
