@@ -43,7 +43,11 @@
           </div>
           <div class="drawer-body">
             <div class="nav nav-pills navbar-nav">
-              <a class="nav-link" aria-current="page" href="index.html"
+              <a
+                id="activities"
+                class="nav-link"
+                aria-current="page"
+                href="index.html"
                 >Activités</a
               >
               <a class="nav-link active" href="postuler.html">Postuler</a>
@@ -111,14 +115,12 @@
                       Theme
                     </label>
 
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="newActivityTheme"
-                      name="newActivityTheme"
-                      placeholder="e.g. Jeu, Apprentissage..."
-                      required
-                    />
+                    <select class="form-select" id="newActivityTheme">
+                      <option value="apprentissage" selected>Apprentissage</option>
+                      <option value="jeu">Jeu</option>
+                      <option value="exercice">Exercice</option>
+                      <option value="autre">Autre</option>
+                    </select>
                   </div>
 
                   <div class="col-md-5">
@@ -160,7 +162,6 @@
                     placeholder="Quels sont les objectives de cette activitée"
                     required
                   ></textarea>
-
                 </div>
 
                 <!-- Description -->
@@ -191,8 +192,12 @@
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-end gap-2">
-                  <button type="reset" class="btn-solid theme-warning">
-                    Reset
+                  <button
+                    type="button"
+                    class="btn-solid theme-danger"
+                    id="resetUser"
+                  >
+                    Reset form/user
                   </button>
 
                   <button type="submit" class="btn-solid theme-success">
