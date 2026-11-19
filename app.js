@@ -15,6 +15,7 @@ retrieveData();
 cartesActivitéAffichage(activities);
 searchActivity(activities);
 filterActivities(activities);
+refreshButton();
 
 function cartesActivitéAffichage(activities) {
   const activitiesContainer = document.getElementById("activitiesContainer");
@@ -119,4 +120,10 @@ function filterActivities(activites) {
       cartesActivitéAffichage(selectedCategoryActivities);
     }
   });
+}
+
+function refreshButton(){
+  const refreshActivities = document.querySelector("#refreshActivities")
+
+  refreshActivities.addEventListener("click", event => {window.location.href = window.location.href})
 }
