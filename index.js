@@ -5,6 +5,7 @@ const URL = "http://127.0.0.1:3000/api/activites";
 mainCode();
 
 async function mainCode() {
+  const detailsForm = document.forms["detailsForm"];
   const activities = await fetchData();
   afficherLesCartes(activities);
   refreshButtonEvent();
@@ -12,6 +13,9 @@ async function mainCode() {
   searchActivity(activities);
   modifyDetails();
   closeDetailsEvent();
+  submitChanges()
+  deleteActivity(activities)
+  // console.log(detailsForm)
 }
 
 async function fetchData() {
@@ -101,6 +105,8 @@ function searchActivity(activities) {
 function fillDetailsModal(detailButtons, activites) {
   const detailsModal = document.forms["detailsForm"];
 
+  const badge = modalThemeBadge
+  const id = modalActivityId;
   const titre = detailsForm.modalTitle;
   const theme = detailsForm.modalTheme;
   const duree = detailsForm.modalDuration;
@@ -109,6 +115,8 @@ function fillDetailsModal(detailButtons, activites) {
   const auteur = detailsForm.modalAuthor;
   const creation = detailsForm.modalCreatedAt;
   const modification = detailsForm.modalUpdatedAt;
+
+  
 
   detailButtons.forEach((button) =>
     button.addEventListener("click", (event) => {
@@ -119,6 +127,8 @@ function fillDetailsModal(detailButtons, activites) {
       detailsForm
         .querySelectorAll("textarea")
         .forEach((ele) => (ele.disabled = true));
+      badge.innerText = activity.theme
+      id.dataset.id = activity.id
       titre.value = activity.titre;
       theme.value = activity.theme;
       duree.value = activity.duree;
@@ -151,7 +161,34 @@ function modifyDetails() {
 
 function closeDetailsEvent() {
   const closeButton = document.getElementById("closeDetails");
+  const closeCross = document.getElementById("closeIcon")
   closeButton.addEventListener("click", (event) => {
     location.href = location.href;
   });
+  closeCross.addEventListener("click", (event) => {
+    location.href = location.href;
+  });
+}
+
+function submitChanges(){
+  const saveChanges = document.getElementById("saveActivityBtn")
+  detailsForm.addEventListener("submit", event => {
+    event.preventDefault();
+    console.log("test")
+  })
+}
+
+async function deleteActivity(activities){
+  const deleteButton = document.getElementById("deleteActivity")
+
+  deleteButton.addEventListener("click", event => {
+    const activityToDelete = activities.find(ele => ele.id == modalActivityId.dataset.id)
+    postDelete(activityToDelete)
+    window.alert("Activité supprimer avec succés.")
+    setTimeout((window.location.href = window.location.href))
+  })
+}
+
+async function postDelete(activityToDelete){
+await axios.delete(`http://127.0.0.1:3000/api/activites/${activityToDelete.id}`)
 }
