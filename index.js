@@ -13,8 +13,8 @@ async function mainCode() {
   searchActivity(activities);
   modifyDetails();
   closeDetailsEvent();
-  submitChanges()
-  deleteActivity(activities)
+  submitChanges();
+  deleteActivity(activities);
   // console.log(detailsForm)
 }
 
@@ -105,7 +105,7 @@ function searchActivity(activities) {
 function fillDetailsModal(detailButtons, activites) {
   const detailsModal = document.forms["detailsForm"];
 
-  const badge = modalThemeBadge
+  const badge = modalThemeBadge;
   const id = modalActivityId;
   const titre = detailsForm.modalTitle;
   const theme = detailsForm.modalTheme;
@@ -116,8 +116,6 @@ function fillDetailsModal(detailButtons, activites) {
   const creation = detailsForm.modalCreatedAt;
   const modification = detailsForm.modalUpdatedAt;
 
-  
-
   detailButtons.forEach((button) =>
     button.addEventListener("click", (event) => {
       const activity = activites.find((ele) => ele.id == button.dataset.id);
@@ -127,8 +125,8 @@ function fillDetailsModal(detailButtons, activites) {
       detailsForm
         .querySelectorAll("textarea")
         .forEach((ele) => (ele.disabled = true));
-      badge.innerText = activity.theme
-      id.dataset.id = activity.id
+      badge.innerText = activity.theme;
+      id.dataset.id = activity.id;
       titre.value = activity.titre;
       theme.value = activity.theme;
       duree.value = activity.duree;
@@ -161,7 +159,7 @@ function modifyDetails() {
 
 function closeDetailsEvent() {
   const closeButton = document.getElementById("closeDetails");
-  const closeCross = document.getElementById("closeIcon")
+  const closeCross = document.getElementById("closeIcon");
   closeButton.addEventListener("click", (event) => {
     location.href = location.href;
   });
@@ -170,25 +168,29 @@ function closeDetailsEvent() {
   });
 }
 
-function submitChanges(){
-  const saveChanges = document.getElementById("saveActivityBtn")
-  detailsForm.addEventListener("submit", event => {
+function submitChanges() {
+  const saveChanges = document.getElementById("saveActivityBtn");
+  detailsForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log("test")
-  })
+    console.log("test");
+  });
 }
 
-async function deleteActivity(activities){
-  const deleteButton = document.getElementById("deleteActivity")
+async function deleteActivity(activities) {
+  const deleteButton = document.getElementById("deleteActivity");
 
-  deleteButton.addEventListener("click", event => {
-    const activityToDelete = activities.find(ele => ele.id == modalActivityId.dataset.id)
-    postDelete(activityToDelete)
-    window.alert("Activité supprimer avec succés.")
-    setTimeout((window.location.href = window.location.href))
-  })
+  deleteButton.addEventListener("click", (event) => {
+    const activityToDelete = activities.find(
+      (ele) => ele.id == modalActivityId.dataset.id,
+    );
+    postDelete(activityToDelete);
+    window.alert("Activité supprimer avec succés.");
+    setTimeout(() => (window.location.href = window.location.href));
+  });
 }
 
-async function postDelete(activityToDelete){
-await axios.delete(`http://127.0.0.1:3000/api/activites/${activityToDelete.id}`)
+async function postDelete(activityToDelete) {
+  await axios.delete(
+    `http://127.0.0.1:3000/api/activites/${activityToDelete.id}`,
+  );
 }
