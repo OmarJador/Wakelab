@@ -10,6 +10,8 @@ async function mainCode() {
   refreshButtonEvent();
   filterActivities(activities);
   searchActivity(activities);
+  modifyDetails();
+  closeDetailsEvent();
 }
 
 async function fetchData() {
@@ -111,6 +113,12 @@ function fillDetailsModal(detailButtons, activites) {
   detailButtons.forEach((button) =>
     button.addEventListener("click", (event) => {
       const activity = activites.find((ele) => ele.id == button.dataset.id);
+      detailsForm
+        .querySelectorAll("input")
+        .forEach((ele) => (ele.disabled = true));
+      detailsForm
+        .querySelectorAll("textarea")
+        .forEach((ele) => (ele.disabled = true));
       titre.value = activity.titre;
       theme.value = activity.theme;
       duree.value = activity.duree;
@@ -121,4 +129,29 @@ function fillDetailsModal(detailButtons, activites) {
       modification.value = activity.updatedAt.substring(0, 10);
     }),
   );
+}
+
+function modifyDetails() {
+  const modifyButton = document.getElementById("modifyActivityBtn");
+  const saveButton = document.getElementById("saveActivityBtn");
+  const cancelButton = document.getElementById("cancelEditBtn");
+
+  modifyButton.addEventListener("click", (event) => {
+    detailsForm
+      .querySelectorAll("input")
+      .forEach((ele) => (ele.disabled = false));
+    detailsForm
+      .querySelectorAll("textarea")
+      .forEach((ele) => (ele.disabled = false));
+    event.target.hidden = true;
+    saveButton.hidden = false;
+    cancelButton.hidden = false;
+  });
+}
+
+function closeDetailsEvent() {
+  const closeButton = document.getElementById("closeDetails");
+  closeButton.addEventListener("click", (event) => {
+    location.href = location.href;
+  });
 }
