@@ -50,7 +50,7 @@ function afficherLesCartes(activities) {
                           class="detailButtons btn btn-warning btn-sm"
                           data-bs-toggle="dialog"
                           data-bs-target="#activityDialog"
-                          data-activity-id="${activity.id}">
+                          data-id="${activity.id}">
                           Details
                       </button>
                     </div>
@@ -60,6 +60,8 @@ function afficherLesCartes(activities) {
 
     activityContainer.innerHTML += carte;
   });
+  const detailButtons = document.querySelectorAll(".detailButtons");
+  fillDetailsModal(detailButtons, activities);
 }
 
 function refreshButtonEvent() {
@@ -92,4 +94,31 @@ function searchActivity(activities) {
     );
     afficherLesCartes(searchedActivities);
   });
+}
+
+function fillDetailsModal(detailButtons, activites) {
+  const detailsModal = document.forms["detailsForm"];
+
+  const titre = detailsForm.modalTitle;
+  const theme = detailsForm.modalTheme;
+  const duree = detailsForm.modalDuration;
+  const objectifs = detailsForm.modalObjectives;
+  const description = detailsForm.modalDescription;
+  const auteur = detailsForm.modalAuthor;
+  const creation = detailsForm.modalCreatedAt;
+  const modification = detailsForm.modalUpdatedAt;
+
+  detailButtons.forEach((button) =>
+    button.addEventListener("click", (event) => {
+      const activity = activites.find((ele) => ele.id == button.dataset.id);
+      titre.value = activity.titre;
+      theme.value = activity.theme;
+      duree.value = activity.duree;
+      objectifs.value = activity.objectifs;
+      description.value = activity.description;
+      auteur.value = activity.auteur;
+      creation.value = activity.createdAt.substring(0, 10);
+      modification.value = activity.updatedAt.substring(0, 10);
+    }),
+  );
 }
