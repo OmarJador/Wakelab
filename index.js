@@ -5,7 +5,7 @@ const URL = "http://127.0.0.1:3000/api/activites";
 mainCode();
 
 async function mainCode() {
-  const detailsForm = document.forms["detailsForm"];
+  // const detailsForm = document.forms["detailsForm"];
   const activities = await fetchData();
   afficherLesCartes(activities);
   refreshButtonEvent();

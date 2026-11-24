@@ -23,9 +23,10 @@ async function submitNewActivity(formNewActivity) {
     event.preventDefault();
     let ele = newActivityObject(formNewActivity);
     postObject(ele);
-    
+
     manageAuthor();
-    window.location.href = window.location.href
+    window.alert("Activité crée avec succées");
+    setTimeout((window.location.href = window.location.href));
   });
 }
 
@@ -53,15 +54,11 @@ async function postObject(ele) {
   await axios.post(URL, ele);
 }
 
-function resetUser(){
+function resetUser() {
+  const resetUserForm = document.getElementById("resetUser");
 
-    const resetUserForm = document.getElementById("resetUser")
-
-    resetUserForm.addEventListener("click", event => {
-
-        localStorage.removeItem("auteur")
-        window.location.href = window.location.href
-
-    })
-
+  resetUserForm.addEventListener("click", (event) => {
+    localStorage.removeItem("auteur");
+    window.location.href = window.location.href;
+  });
 }
